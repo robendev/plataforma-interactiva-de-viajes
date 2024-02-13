@@ -13,7 +13,7 @@ const checkAuth = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       req.usuario = await Usuario.findById(decoded.id).select(
-        "-password -isConfirmed -token -createAt -updateAt -__v"
+        "-password -isConfirmed -token -createdAt -updatedAt -__v"
       );
 
       return next();
