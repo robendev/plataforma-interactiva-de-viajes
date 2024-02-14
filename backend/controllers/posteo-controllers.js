@@ -1,4 +1,5 @@
 import Posteo from "../models/Posteo.js";
+import Comentario from "../models/Comentario.js";
 
 // ----------------------------------------------------------------
 
@@ -56,6 +57,9 @@ const eliminarPosteo = async (req, res) => {
   }
 
   try {
+    // Elimino todos los comentarios del modelo de Comentario, que estén en el campo de "comments" del posteo a eliminar
+    await Comentario.deleteMany({ _id: { $in: posteo.comments } });
+
     await posteo.deleteOne();
 
     res.status(200).json({ msg: "Posteo eliminado correctamente" });
@@ -93,7 +97,10 @@ const obtenerPosteoDelUsuarioAutenticado = async (req, res) => {
   const { posteoId } = req.params;
 
   // Verificamos que exista un posteo con ese id
-  const posteo = await Posteo.findById({ _id: posteoId });
+  const posteo = await Posteo.findById({ _id: posteoId }).populate(
+    "comments",
+    "-__v"
+  );
   if (!posteo) {
     const error = new Error("Posteo no encontrado");
     return res.status(404).json({ msg: error.message });
@@ -116,7 +123,10 @@ const obtenerPosteosDelUsuarioAutenticado = async (req, res) => {
   const { usuario } = req;
 
   try {
-    const posteos = await Posteo.find().where("author").equals(usuario._id);
+    const posteos = await Posteo.find()
+      .where("author")
+      .equals(usuario._id)
+      .populate("comments", "-__v");
 
     res.status(200).json(posteos);
   } catch (error) {
@@ -128,7 +138,7 @@ const obtenerPosteosDelUsuarioAutenticado = async (req, res) => {
 
 const obtenerPosteosDeTodosLosUsuarios = async (req, res) => {
   try {
-    const posteos = await Posteo.find();
+    const posteos = await Posteo.find().populate("comments", "-__v");
     res.status(200).send(posteos);
   } catch (error) {
     console.log(error);
