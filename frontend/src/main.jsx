@@ -4,8 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Index from "./routes";
 import Root from "./routes/root";
-import Login from "./routes/login";
-import Register from "./routes/register";
+import Login, { action as loginAction } from "./routes/login";
+import Register, { action as registerAction } from "./routes/register";
 
 import ErrorPage from "./error-page";
 
@@ -24,10 +24,12 @@ const router = createBrowserRouter([
       {
         path: "iniciar-sesion",
         element: <Login />,
+        action: loginAction,
       },
       {
         path: "registrarse",
         element: <Register />,
+        action: registerAction,
       },
     ],
   },

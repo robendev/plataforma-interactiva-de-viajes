@@ -5,7 +5,7 @@ function ErrorPage() {
   console.error(error);
 
   return (
-    <div id="error-page" className="min-h-screen">
+    <div className="min-h-screen flex flex-col justify-center items-center">
       <h1 className="text-6xl mb-2">Oops!</h1>
       <p className="text-1xl mb-5">Sorry, an unexpected error has occurred.</p>
       <p className="text-4xl border-b border-[#ff0000] p-1 rounded transition transform ease-in-out hover:scale-110 duration-300 *:text-[#ff0000]">

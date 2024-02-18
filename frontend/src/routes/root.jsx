@@ -11,12 +11,12 @@ function Root() {
             </li>
           </ul>
 
-          <ul className="flex gap-5 mr-5 text-xl [&_a]:shadow [&_a]:shadow-black [&_a]:rounded-3xl ">
+          <ul className="flex gap-5 mr-5 text-xl [&_a]:shadow [&_a]:shadow-black [&_a]:rounded ">
             {/* [&_a.active]:text-yellow-400 */}
-            <li className="transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300">
+            <li className="transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
               <NavLink to="/iniciar-sesion">Iniciar sesión</NavLink>
             </li>
-            <li className="transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300">
+            <li className="transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
               <NavLink to="/registrarse">Regístrate</NavLink>
             </li>
           </ul>
